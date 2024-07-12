@@ -1,0 +1,21 @@
+import requests
+import pandas as pd
+url ='https://iftp.chinamoney.com.cn/english/bdInfo/'
+#发起请求并获取页面内容
+response =requests.get(url)
+#使用pandas的read html函数读取网页中的表格数据tables = pd.read html(response.text)
+#找到符合条件的表格
+table = None
+for t in tables:
+if 'Bond Type' in t.columns and 'Issue Year' in t.columns:if t[(t['Bond Type'l=='Treasury Bond')&(t['Issue Year']== 2023)].shape[0]>0:table =tbreak
+#如果找到符合条件的表格，则保存为CSV文件
+if table is not None:
+#定义要保存的列名columns =「'ISIN', 'Bond Code', 'Issuer', 'Bond Type', 'Issue Date', 'Latest Rating'1
+#提取符合条件的数据
+data = table[table['Bond Type'l== 'Treasury Bond'
+data = dataldata'Issue Year']== 2023][columns]
+#将数据保存为CSV文件
+data.to csv('output.csv',index=False)
+print('数据已保存为output.csv文件')
+else:
+print('未找到符合条件的数据')
