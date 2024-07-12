@@ -1,0 +1,31 @@
+import re
+
+def reg_search(text, regex_list):
+    # 初始化一个空列表用于存储匹配结果
+    matches = []
+    
+    # 遍历正则表达式列表
+    for regex in regex_list:
+        # 编译正则表达式
+        pattern = re.compile(regex)
+        
+        # 使用findall方法查找所有匹配项
+        found = pattern.findall(text)
+        
+        # 如果找到匹配项，则添加到结果列表中
+        if found:
+            matches.append(found)
+    
+    # 返回所有匹配结果
+    return matches
+
+# 示例使用
+text = "Hello, this is a test. Testing 123."
+regex_list = [
+    r'\b\w+\b',  # 匹配单词
+    r'\d+',       # 匹配数字
+    r'\btest\b',  # 匹配单词 'test'
+]
+
+# 调用函数并打印结果
+print(reg_search(text, regex_list))
